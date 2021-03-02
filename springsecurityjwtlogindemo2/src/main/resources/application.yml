@@ -14,6 +14,52 @@ spring:
     username: xiroi
     password: 123456
     url: jdbc:mysql://localhost:3306/test_database
+  redis:
+    timeout: 10000ms
+    host: 127.0.0.1
+    port: 6379
+    password: root
+    database: 0
+    lettuce:
+      pool:
+        max-active: 1024
+        max-wait: 10000ms
+        #最大空闲连接
+        max-idle: 200
+        min-idle: 5
+#邮件配置
+#https://blog.csdn.net/a030455/article/details/109788594
+#https://service.mail.qq.com/cgi-bin/help?subtype=1&&no=369&&id=28
+  mail:
+    host: smtp.qq.com
+    username: 2431213507@qq.com
+    password: cakgsjxbpjupdifb
+    #发送邮件服务器：smtp.qq.com，使用SSL，端口号465或587
+    port: 465
+    default-encoding: UTF-8
+    protocol: smtp
+    properties:
+      mail:
+        debug: true
+        smtp:
+          auth: true
+          ssl:
+            enable: true
+          socketFactory:
+            port: 465
+          socketFactoryClass: javax.net.ssl.SSLSocketFactory
+  #http://localhost:15672/
+  rabbitmq:
+    username: guest
+    password: guest
+    host: localhost
+    port: 5672
+    #消息确认回调
+    publisher-confirm-type: correlated
+    #消息失败回调
+    publisher-returns: true
+  thymeleaf:
+    prefix: classpath:/templates/
 
 mybatis-plus:
   configuration:
@@ -24,6 +70,7 @@ mybatis-plus:
     db-config:
       id-type: auto
       table-prefix: tab_
+      update-strategy: not_empty
   mapper-locations: classpath:/mappers/**
 
 #logging:
@@ -43,3 +90,4 @@ developer:
   username: developer
   password: 123456
   role: ROLE_developer
+  email: xiroiyuki@hotmail.com

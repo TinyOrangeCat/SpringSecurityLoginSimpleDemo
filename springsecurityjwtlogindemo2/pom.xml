@@ -18,6 +18,32 @@
         <mybatis.plus.generator.version>3.4.1</mybatis.plus.generator.version>
     </properties>
     <dependencies>
+        <!-- SpringMail 依赖 START -->
+        <!-- RabbitMQ依赖 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-amqp</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-mail</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
+
+        <!-- 如果项目中的Mail是一个modual 需要填入对应模块对应坐标 -->
+        <!--<dependency>
+            <groupId>com.yueli.mail</groupId>
+            <artifactId>xxxmail</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>-->
+        <!-- SpringMail依赖 END -->
+
+        <!-- MybatisPlus Generator依赖 START -->
         <!--<dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-generator</artifactId>
@@ -28,18 +54,25 @@
             <artifactId>velocity-engine-core</artifactId>
             <version>2.2</version>
         </dependency>-->
+        <!-- MybatisPlus Generator依赖 START -->
+
+        <!-- 验证码依赖 START -->
         <!-- https://mvnrepository.com/artifact/com.github.axet/kaptcha -->
         <dependency>
             <groupId>com.github.axet</groupId>
             <artifactId>kaptcha</artifactId>
             <version>0.0.9</version>
         </dependency>
+        <!-- 验证码依赖 END -->
 
+        <!-- swagger依赖 START -->
         <dependency>
             <groupId>io.springfox</groupId>
             <artifactId>springfox-boot-starter</artifactId>
             <version>3.0.0</version>
         </dependency>
+        <!-- swagger依赖 END -->
+        <!-- MyBatis Plus依赖 Start -->
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>
@@ -51,16 +84,33 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.23</version>
         </dependency>
+        <!-- MyBatis Plus依赖 END -->
 
+        <!-- Redis依赖 START -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-pool2 -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-pool2</artifactId>
+            <version>2.9.0</version>
+        </dependency>
+        <!-- Redis依赖 END -->
+
+        <!-- jwt依赖 START -->
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt</artifactId>
             <version>0.9.1</version>
+        </dependency>
+        <!-- jwt依赖 END -->
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
 
         <dependency>

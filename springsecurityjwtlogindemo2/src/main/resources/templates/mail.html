@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Create by : YueLi/xiroiyuki@hotmail.com -->
+    <!-- Create time: 2021/3/2 17:26 -->
+    <meta charset="UTF-8">
+    <title>大橘邮件测试</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+</head>
+<body>
+    <span th:text="${loginName}"></span>,欢迎登录!
+    <br/>
+    <p>&emsp;&emsp;回乡偶书二首·其一</p>
+    <p>&emsp;&emsp;【唐】贺知章</p>
+    <p>&emsp;&emsp;少小离家老大回，乡音无改鬓毛衰。</p>
+    <p>&emsp;&emsp;儿童相见不相识，笑问客从何处来。</p>
+    <br/>
+    <br/>
+    &emsp;&emsp;<span>YueLi</span>
+    <br/>
+    &emsp;&emsp;发送于：<span th:text="${sendDate}"></span>
+    <br/>
+    &emsp;&emsp;<span>(自动投递 Hi~ o(*￣▽￣*)ブHi~ o(*￣▽￣*)ブ )</span>
+</body>
+</html>

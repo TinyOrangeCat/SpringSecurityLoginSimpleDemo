@@ -1,0 +1,17 @@
+# JavaMailSender Config
+spring.mail.host=smtp.163.com
+spring.mail.username=xxx@163.com #你的163邮箱地址
+spring.mail.password=xxx #你的163邮箱授权密码
+spring.mail.properties.mail.smtp.auth=true
+spring.mail.properties.mail.smtp.starttls.enable=true
+spring.mail.properties.mail.smtp.starttls.required=true
+
+# SSL Config
+spring.mail.port=465
+spring.mail.protocol=smtp
+spring.mail.default-encoding=UTF-8
+spring.mail.properties.mail.smtp.ssl.enable=true
+spring.mail.properties.mail.smtp.socketFactory.port=465
+spring.mail.properties.mail.smtp.socketFactory.class=javax.net.ssl.SSLSocketFactory
+
+#原文链接：https://blog.csdn.net/weixin_38575051/article/details/93591123

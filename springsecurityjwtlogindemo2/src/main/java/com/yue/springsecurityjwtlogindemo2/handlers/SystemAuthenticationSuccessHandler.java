@@ -2,6 +2,7 @@ package com.yue.springsecurityjwtlogindemo2.handlers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.yue.springsecurityjwtlogindemo2.models.SystemLoginAccount;
+import com.yue.springsecurityjwtlogindemo2.services.ISystemMailService;
 import com.yue.springsecurityjwtlogindemo2.utils.JWTTokenUtils;
 import com.yue.springsecurityjwtlogindemo2.utils.RespBean;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +37,10 @@ public class SystemAuthenticationSuccessHandler implements AuthenticationSuccess
     private  String developerRole;
     @Value("${jwt.tokenHead}")
     private String tokenHead;
+    @Autowired
+    private ISystemMailService systemMailServiceImpl;
+    @Value("${developer.email}")
+    private String email;
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
@@ -47,6 +52,8 @@ public class SystemAuthenticationSuccessHandler implements AuthenticationSuccess
             SystemLoginAccount userDetails = (SystemLoginAccount) authentication.getPrincipal();
             accountId = userDetails.getAccountId();
             System.out.println("YUE onAuthenticationSuccess "+userDetails.getUsername()+","+authentication.getCredentials()+","+userDetails.getAccountId());
+            systemMailServiceImpl.sendMailMailQueue(userDetails.getUsername(),email);
+            //systemMailServiceImpl.sendMailMail(userDetails.getUsername(),email);
             token = jwtTokenUtils.generateToken(userDetails);
             if(developerName.equals(userDetails.getUsername())){
                 isDeveloper = true;

@@ -1,4 +1,4 @@
-/*
+
 package com.yue.springsecurityjwtlogindemo2.token;
 
 import org.springframework.security.authentication.AbstractAuthenticationToken;
@@ -7,12 +7,12 @@ import org.springframework.util.Assert;
 
 import java.util.Collection;
 
-*/
+
 /*
  * @Description TODO
  * @Author YueLi/xiroiyuki@hotmail.com
  * @Time 2021/3/1 20:29
- *//*
+ */
 
 public class SystemUsernamePasswordAuthenticationToken extends AbstractAuthenticationToken {
 
@@ -30,13 +30,13 @@ public class SystemUsernamePasswordAuthenticationToken extends AbstractAuthentic
         setAuthenticated(false);
     }
 
-    */
+
 /**
      * Creates a token with the supplied array of authorities.
      *
      * @param authorities the collection of <tt>GrantedAuthority</tt>s for the principal
      *                    represented by this authentication object.
-     *//*
+     */
 
     public SystemUsernamePasswordAuthenticationToken(Object principal, Object credentials,String captchaCode,
                                                Collection<? extends GrantedAuthority> authorities) {
@@ -74,4 +74,4 @@ public class SystemUsernamePasswordAuthenticationToken extends AbstractAuthentic
         return this.captchaCode;
     }
 }
-*/
+

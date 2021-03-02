@@ -10,6 +10,10 @@ import com.yue.springsecurityjwtlogindemo2.utils.JWTTokenUtils;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
+
+import java.util.UUID;
 
 @SpringBootTest
 class Springsecurityjwtlogindemo2ApplicationTests {
@@ -23,6 +27,9 @@ class Springsecurityjwtlogindemo2ApplicationTests {
     UserController userController;
     @Autowired
     ManagerController managerController;
+
+    @Autowired
+    RedisTemplate redisTemplate;
 
     @Test
     void contextLoads() {
@@ -52,6 +59,28 @@ class Springsecurityjwtlogindemo2ApplicationTests {
     @Test
     public void getManagerInfoTest(){
         System.out.println(managerController.getManagerInfo(1));
+    }
+
+    //RedisTest START
+    @Test
+    public void redisTest(){
+        ValueOperations<String,Object> valueOperations = redisTemplate.opsForValue();
+        //valueOperations.get("menu_");
+        valueOperations.set("myKey1","myValue1");
+    }
+
+    @Test
+    public void redisGetTest(){
+        ValueOperations<String,Object> valueOperations = redisTemplate.opsForValue();
+        //valueOperations.get("menu_");
+        Object obj = valueOperations.get("myKey1");
+        System.out.println(obj);
+    }
+    //RedisTest END
+
+    @Test
+    public void UUIDTest(){
+        //UUID.randomUUID().
     }
 
 }
