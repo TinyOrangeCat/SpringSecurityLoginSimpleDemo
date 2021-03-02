@@ -18,6 +18,12 @@ http://localhost:8081
 
 http://localhost:8081/developer/swagger-ui/index.html
 
+### 5.数据库
+
+测试数据库默认为：test_database
+
+resources/sqls下有测试用的建表语句。
+
 
 
 ## 二、登录操作
