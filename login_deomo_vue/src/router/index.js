@@ -33,7 +33,7 @@ const routes = [
     component: ()=>import('../views/UserWelcome')
   },
   {
-    path: '/userManager',
+    path: '/managerWelcome',
     name: 'WelcomeManager',
     component: ()=>import('../views/ManagerWelcome')
   },
@@ -41,6 +41,11 @@ const routes = [
     path: '/userInfoVue',
     name: 'UserInfoVue',
     component: ()=>import('../views/UserInfoVue')
+  },
+  {
+    path: '/managerInfoVue',
+    name: 'ManagerInfoVue',
+    component: ()=>import('../views/ManagerInfoVue')
   }
   /*{
     path: '/about',

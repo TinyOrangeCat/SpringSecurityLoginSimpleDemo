@@ -13,4 +13,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface IManagerInfoService extends IService<ManagerInfo> {
 
+    ManagerInfo getManagerInfoByManagerId(Integer managerId);
+
 }

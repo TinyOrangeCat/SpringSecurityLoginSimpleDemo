@@ -36,5 +36,7 @@ http://localhost:8081/developer/swagger-ui/index.html
 
 前端向后端请求数据：
 
-已配置跨域请求，所有向后端请求的数据需要以“/backendServer”开关。
+已配置跨域请求，所有向后端请求的数据需要以“/backendServer”开头。
+
+除登录请求外，其他请求需要协带Token，用户请求路径以/backendServer/user开头，管理员请求路径以/backendServer/manager开头。
 

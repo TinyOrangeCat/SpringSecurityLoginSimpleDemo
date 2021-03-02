@@ -1,5 +1,6 @@
 package com.yue.springsecurityjwtlogindemo2;
 
+import com.yue.springsecurityjwtlogindemo2.controllers.ManagerController;
 import com.yue.springsecurityjwtlogindemo2.controllers.UserController;
 import com.yue.springsecurityjwtlogindemo2.mappers.UserMapper;
 import com.yue.springsecurityjwtlogindemo2.services.IManagerService;
@@ -20,6 +21,8 @@ class Springsecurityjwtlogindemo2ApplicationTests {
     JWTTokenUtils jwtTokenUtils;
     @Autowired
     UserController userController;
+    @Autowired
+    ManagerController managerController;
 
     @Test
     void contextLoads() {
@@ -45,6 +48,10 @@ class Springsecurityjwtlogindemo2ApplicationTests {
     @Test
     public void getUserInfoTest(){
         System.out.println(userController.getUserInfo(1));
+    }
+    @Test
+    public void getManagerInfoTest(){
+        System.out.println(managerController.getManagerInfo(1));
     }
 
 }

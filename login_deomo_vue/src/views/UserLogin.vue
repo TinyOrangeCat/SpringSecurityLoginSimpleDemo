@@ -1,6 +1,7 @@
 <template>
   <div id="userLogin">
     <div id="loginDiv" v-loading="isLoading" element-loading-text="登录中...">
+      <h3 class="loginTitle">用户登录</h3>
       <el-form :label-position="labelPosition" :model="loginForm" :rules="loginFormRules" ref="userLoginForm" label-width="100px" class="demo-ruleForm">
         <el-form-item label="登录账户" prop="loginAccount">
           <el-input v-model="loginForm.loginAccount" placeholder="请输入登录用户名"></el-input>
@@ -114,8 +115,13 @@ name: "UserLogin",
   }
   #userLogin{
     width: 50%;
-    margin: 200px auto 0px auto;
+    margin: 180px auto 0px auto;
     box-shadow: 0 4px 6px rgba(0, 0, 0, .12), 0 2px 6px rgba(0, 0, 0, .04);
+  }
+  .loginTitle {
+    margin: 35px auto 0px auto;
+    text-align: center;
+    color: #505458;
   }
   .el-form-item__content{
     display: flex;

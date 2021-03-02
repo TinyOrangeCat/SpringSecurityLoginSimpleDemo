@@ -7,7 +7,7 @@
         <label>{{userId}}</label>
       </div>
       <div>
-        <a href="">退出登录</a>
+        <el-button v-on:click="userLogout">退出登录</el-button>
       </div>
       <div>
         <a href="/userInfoVue">查看个人信息</a>
@@ -41,6 +41,21 @@ name: "UserWelcome",
     requestTest(){
       this.putRequest("/backendServer/user/meowmewo",{'a':'1111'}).then(resp=>{
         console.log("putTest: "+resp);
+      })
+    },
+    userLogout(){
+      this.$messageBox.confirm('此操作将退出登录，是否继续？','提示',{
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(()=>{
+        this.postRequest('/backendServer/logout').then(resp=>{
+          window.sessionStorage.removeItem("userToken");
+          window.sessionStorage.removeItem("userID");
+          this.$router.replace('/');
+        })
+      }).catch(()=>{
+        this.$message.info('已取消退出!');
       })
     }
   }
