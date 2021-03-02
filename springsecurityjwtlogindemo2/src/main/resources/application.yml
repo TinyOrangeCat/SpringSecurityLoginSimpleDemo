@@ -1,0 +1,45 @@
+server:
+  port: 8081
+  #servlet:
+    #context-path: /backendServer
+
+springfox:
+  documentation:
+    swagger-ui:
+      base-url: /developer
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: xiroi
+    password: 123456
+    url: jdbc:mysql://localhost:3306/test_database
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+    use-generated-keys: true
+    #log-impl: org.apache.ibatis.logging.log4j.Log4jImpl
+  global-config:
+    db-config:
+      id-type: auto
+      table-prefix: tab_
+  mapper-locations: classpath:/mappers/**
+
+#logging:
+  #config: classpath:log4j.xml
+
+jwt:
+  #JWT存储的请求头
+  tokenHeader: Authorization
+  #JWT加解密码使用的密钥
+  secret: login-secret
+  #JWT的超时时间
+  expiration: 604800
+  #JWT负载中拿到开头
+  tokenHead: Bearer
+
+developer:
+  username: developer
+  password: 123456
+  role: ROLE_developer

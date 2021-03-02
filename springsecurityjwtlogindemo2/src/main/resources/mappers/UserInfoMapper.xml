@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yue.springsecurityjwtlogindemo2.mappers.UserInfoMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.yue.springsecurityjwtlogindemo2.beans.UserInfo">
+        <id column="user_info_id" property="userInfoId" />
+        <result column="user_account_id" property="userAccountId" />
+        <result column="user_name" property="userName" />
+        <result column="user_age" property="userAge" />
+        <result column="user_gender" property="userGender" />
+        <result column="user_email" property="userEmail" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        user_info_id, user_account_id, user_name, user_age, user_gender, user_email
+    </sql>
+
+</mapper>

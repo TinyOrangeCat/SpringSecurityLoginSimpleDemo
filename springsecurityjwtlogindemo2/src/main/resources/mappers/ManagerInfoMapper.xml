@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yue.springsecurityjwtlogindemo2.mappers.ManagerInfoMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.yue.springsecurityjwtlogindemo2.beans.ManagerInfo">
+        <id column="manager_info_id" property="managerInfoId" />
+        <result column="manager_account_id" property="managerAccountId" />
+        <result column="manager_name" property="managerName" />
+        <result column="manager_code" property="managerCode" />
+        <result column="manager_email" property="managerEmail" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        manager_info_id, manager_account_id, manager_name, manager_code, manager_email
+    </sql>
+
+</mapper>
