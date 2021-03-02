@@ -16,6 +16,7 @@ import java.util.Properties;
 public class Captcha {
     @Bean
     public DefaultKaptcha defaultKaptcha() {
+        String stringVerify = "abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         //验证友生成器
         DefaultKaptcha defaultKaptcha = new DefaultKaptcha();
         //配置
@@ -35,7 +36,12 @@ public class Captcha {
         //字体大小 默认40
         properties.setProperty("kaptcha.textproducer.font.size","30");
         //验证码文本字符内容范围 默认为abced2345678ynmnpwx
-        //properties.setProperty("kaptcha.textproducer.char.string","30");
+        properties.setProperty("kaptcha.textproducer.char.string",stringVerify);
+        //修改背景
+        //图片样式： 水纹com.google.code.kaptcha.impl.WaterRipple
+        // 鱼眼com.google.code.kaptcha.impl.FishEyeGimpy
+        // 阴影com.google.code.kaptcha.impl.ShadowGimpy
+        properties.setProperty("kaptcha.obscurificator.impl","com.google.code.kaptcha.impl.ShadowGimpy");
         //字符长度 默认为5
         properties.setProperty("kaptcha.textproducer.char.length","4");
         //字符间距 默认为2

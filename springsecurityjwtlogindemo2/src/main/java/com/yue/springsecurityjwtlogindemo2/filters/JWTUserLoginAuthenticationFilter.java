@@ -63,7 +63,7 @@ public class JWTUserLoginAuthenticationFilter extends AbstractAuthenticationProc
         String captchaSessionCode = obtainSessionCode(request);
         captchaSessionCode = (captchaSessionCode != null) ? captchaSessionCode : "";
         System.out.println(TAG+"manager attemptAuthentication code: "+captchaCode+",sessionCode : "+captchaSessionCode);
-        if("".equals(captchaCode) || "".equals(captchaSessionCode) || !captchaCode.equals(captchaSessionCode)){
+        if("".equals(captchaCode) || "".equals(captchaSessionCode) || !captchaCode.equalsIgnoreCase(captchaSessionCode)){
             throw new CaptchaNotMatchException("用户图形验证码不正确!");
         }
         //验证图形验证码 END
