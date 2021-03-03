@@ -1,0 +1,12 @@
+
+.idea
+
+/springsecurityjwtlogindemo2/src/main/**/target/
+
+/springsecurityjwtlogindemo2/src/test/**/target/
+
+/springsecurityjwtlogindemo2/src/main/**/build/
+
+/springsecurityjwtlogindemo2/src/test/**/build/
+
+/login_deomo_vue/.idea

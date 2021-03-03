@@ -32,8 +32,8 @@ spring:
 #https://service.mail.qq.com/cgi-bin/help?subtype=1&&no=369&&id=28
   mail:
     host: smtp.qq.com
-    username: 2431213507@qq.com
-    password: cakgsjxbpjupdifb
+    username: XXXXXXX@qq.com
+    password: #SMTP密码
     #发送邮件服务器：smtp.qq.com，使用SSL，端口号465或587
     port: 465
     default-encoding: UTF-8
@@ -90,4 +90,4 @@ developer:
   username: developer
   password: 123456
   role: ROLE_developer
-  email: xiroiyuki@hotmail.com
+  email: #TestMail
