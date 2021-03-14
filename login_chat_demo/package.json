@@ -1,0 +1,61 @@
+{
+  "name": "login_chat_demo",
+  "version": "0.1.0",
+  "author": "YueLee <xiroiyuki@hotmail.com>",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "vuebuild": "vue-cli-service build",
+    "dev": "cross-env NODE_ENV=development webpack-dev-server --config ./build/webpack.config.js --open --hot",
+    "build": "cross-env NODE_ENV=production webpack --config ./build/webpack.config.js --progress --hide-modules",
+    "webbuild": "webpack --mode production --config ./build/webpack.prod.config.js",
+    "webdev" : "webpack-dev-server --mode development --config ./build/webpack.dev.config.js"
+  },
+  "dependencies": {
+    "axios": "^0.21.1",
+    "element-ui": "^2.15.1",
+    "qs": "^6.5.2",
+    "sockjs-client": "^1.5.0",
+    "stompjs": "^2.3.3",
+    "vue": "^2.6.11",
+    "vue-router": "^3.2.0",
+    "vuex": "^3.4.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.13.10",
+    "@babel/preset-env": "^7.13.10",
+    "@vue/babel-preset-app": "^4.5.11",
+    "@vue/cli-plugin-router": "~4.5.0",
+    "@vue/cli-plugin-vuex": "~4.5.0",
+    "@vue/cli-service": "~4.5.0",
+    "babel-loader": "^8.2.2",
+    "babel-plugin-component": "^1.1.1",
+    "clean-webpack-plugin": "^3.0.0",
+    "cross-env": "^7.0.3",
+    "css-loader": "^3.6.0",
+    "file-loader": "^4.3.0",
+    "friendly-errors-webpack-plugin": "^1.7.0",
+    "html-loader": "^1.3.2",
+    "html-webpack-plugin": "^4.5.0",
+    "mini-css-extract-plugin": "^0.9.0",
+    "node-sass": "^4.14.1",
+    "optimize-css-assets-webpack-plugin": "^5.0.4",
+    "postcss": "^7.0.35",
+    "postcss-loader": "^4.2.0",
+    "sass-loader": "^10.0.0",
+    "style-loader": "^2.0.0",
+    "uglifyjs-webpack-plugin": "^2.2.0",
+    "url-loader": "^2.3.0",
+    "vue-loader": "^15.9.6",
+    "vue-template-compiler": "^2.6.11",
+    "webpack": "^4.46.0",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.2",
+    "webpack-merge": "^4.2.2"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ]
+}

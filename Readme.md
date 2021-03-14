@@ -46,3 +46,11 @@ resources/sqls下有测试用的建表语句。
 
 除登录请求外，其他请求需要协带Token，用户请求路径以/backendServer/user开头，管理员请求路径以/backendServer/manager开头。
 
+
+
+## 四、在线聊天
+
+使用WebSocket实现，注册/ws/chatEndpoint端点，在/user/queue/chat发送消息。
+
+聊天部分的前端demo来自https://github.com/is-liyiwei/vue-Chat-demo.git，感谢！
+

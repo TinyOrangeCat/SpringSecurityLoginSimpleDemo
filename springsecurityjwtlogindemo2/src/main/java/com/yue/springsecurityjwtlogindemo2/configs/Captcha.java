@@ -34,7 +34,7 @@ public class Captcha {
         //设置字体样式
         properties.setProperty("kaptcha.textproducer.font.names","宋体,楷体,微软雅黑");
         //字体大小 默认40
-        properties.setProperty("kaptcha.textproducer.font.size","30");
+        properties.setProperty("kaptcha.textproducer.font.size","40");
         //验证码文本字符内容范围 默认为abced2345678ynmnpwx
         properties.setProperty("kaptcha.textproducer.char.string",stringVerify);
         //修改背景
@@ -45,11 +45,11 @@ public class Captcha {
         //字符长度 默认为5
         properties.setProperty("kaptcha.textproducer.char.length","4");
         //字符间距 默认为2
-        properties.setProperty("kaptcha.textproducer.char.space","2");
+        properties.setProperty("kaptcha.textproducer.char.space","6");
         //验证友图片宽度 默认200
-        properties.setProperty("kaptcha.image.width","100");
+        properties.setProperty("kaptcha.image.width","150");
         //验证码图片高度 默认40
-        properties.setProperty("kaptcha.image.height","40");
+        properties.setProperty("kaptcha.image.height","50");
         Config config = new Config(properties);
         defaultKaptcha.setConfig(config);
         return defaultKaptcha;

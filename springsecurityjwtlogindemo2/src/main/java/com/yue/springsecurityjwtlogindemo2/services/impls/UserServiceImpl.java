@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * <p>
  *  服务实现类
@@ -26,5 +28,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     @Override
     public User loadUserByUsername(String name) {
         return userMapper.selectOne(new QueryWrapper<User>().eq("user_account",name));
+    }
+
+    @Override
+    public List<User> getUsersByKeyWord(String keyWord) {
+        return userMapper.selectList(new QueryWrapper<User>().ne("user_account",keyWord));
     }
 }

@@ -51,7 +51,7 @@ public class JWTTokenPreRequestFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {
-        System.out.println("YUE JWTTokenPreRequestFilter");
+        System.out.println("YUE JWTTokenPreRequestFilter url is : "+httpServletRequest.getRequestURI());
         String authenticationToken = httpServletRequest.getHeader(tokenHeader);
         if(authenticationToken != null && authenticationToken.startsWith(tokenHead)){
             String token = authenticationToken.substring(tokenHead.length());

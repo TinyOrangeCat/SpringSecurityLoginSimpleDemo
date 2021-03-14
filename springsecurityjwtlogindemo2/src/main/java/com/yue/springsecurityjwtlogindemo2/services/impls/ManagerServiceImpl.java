@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * <p>
  *  服务实现类
@@ -26,5 +28,10 @@ public class ManagerServiceImpl extends ServiceImpl<ManagerMapper, Manager> impl
     @Override
     public Manager loadManagerByName(String name) {
         return managerMapper.selectOne(new QueryWrapper<Manager>().eq("manager_account",name));
+    }
+
+    @Override
+    public List<Manager> getAllManagersByKeyWords(String keyWords) {
+        return managerMapper.selectList(new QueryWrapper<Manager>().ne("manager_account",keyWords));
     }
 }

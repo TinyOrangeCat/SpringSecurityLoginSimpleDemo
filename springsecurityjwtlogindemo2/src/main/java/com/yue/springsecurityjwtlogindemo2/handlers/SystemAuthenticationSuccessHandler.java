@@ -48,11 +48,14 @@ public class SystemAuthenticationSuccessHandler implements AuthenticationSuccess
         String token = null;
         boolean isDeveloper = false;
         Integer accountId = null;
+        String username = null;
         if(authentication != null && authentication.getPrincipal() !=null) {
             SystemLoginAccount userDetails = (SystemLoginAccount) authentication.getPrincipal();
             accountId = userDetails.getAccountId();
+            username = userDetails.getUsername();
             System.out.println("YUE onAuthenticationSuccess "+userDetails.getUsername()+","+authentication.getCredentials()+","+userDetails.getAccountId());
-            systemMailServiceImpl.sendMailMailQueue(userDetails.getUsername(),email);
+            //登录后发送邮件
+            //systemMailServiceImpl.sendMailMailQueue(userDetails.getUsername(),email);
             //systemMailServiceImpl.sendMailMail(userDetails.getUsername(),email);
             token = jwtTokenUtils.generateToken(userDetails);
             if(developerName.equals(userDetails.getUsername())){
@@ -69,9 +72,8 @@ public class SystemAuthenticationSuccessHandler implements AuthenticationSuccess
         Map<String,Object> tokenInfo = new HashMap<>();
         tokenInfo.put("token",token);
         tokenInfo.put("tokenHead",tokenHead);
-        if(accountId != null){
-            tokenInfo.put("accountId",accountId);
-        }
+        tokenInfo.put("accountId",accountId);
+        tokenInfo.put("username",username);
         RespBean respBean = RespBean.success("账号认证成功!",tokenInfo);
         printWriter.write(new ObjectMapper().writeValueAsString(respBean));
         printWriter.flush();

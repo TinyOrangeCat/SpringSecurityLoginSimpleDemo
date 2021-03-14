@@ -1,0 +1,41 @@
+//Create by : YueLi/xiroiyuki@hotmail.com 
+//Create time: 2021/3/10 20:14
+
+npm install stompjs
+
+function connection(context){
+    connect(context) {
+        context.state.stomp = Stomp.over(new SockJS('/ws/ep'));
+        context.state.stomp.connect({}, success => {
+            context.state.stomp.subscribe('/user/queue/chat', msg => {
+                let receiveMsg = JSON.parse(msg.body);
+                if (!context.state.currentSession || receiveMsg.from != context.state.currentSession.username) {
+                    Notification.info({
+                        title: '【' + receiveMsg.fromNickname + '】发来一条消息',
+                        message: receiveMsg.content.length > 10 ? receiveMsg.content.substr(0, 10) : receiveMsg.content,
+                        position: 'bottom-right'
+                    })
+                    Vue.set(context.state.isDot, context.state.currentHr.username + '#' + receiveMsg.from, true);
+                }
+                receiveMsg.notSelf = true;
+                receiveMsg.to = receiveMsg.from;
+                context.commit('addMessage', receiveMsg);
+            })
+        }, error => {
+
+        })
+    }
+}
+
+function addTheMessage(e){
+    addMessage(e) {
+        if (e.ctrlKey && e.keyCode === 13 && this.content.length) {
+            let msgObj = new Object();
+            msgObj.to = this.currentSession.username;
+            msgObj.content = this.content;
+            this.$store.state.stomp.send('/ws/chat', {}, JSON.stringify(msgObj));
+            this.$store.commit('addMessage', msgObj);
+            this.content = '';
+        }
+    }
+}
