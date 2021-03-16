@@ -215,10 +215,7 @@ module.exports = webpackMerge(baseConfig,{
          */
         extractComments: 'all'
       }),
-      new OptimizeCSSAssetsPlugin({
-        publicPath: '../',
-
-      })
+      new OptimizeCSSAssetsPlugin({})
     ]
   }
 
