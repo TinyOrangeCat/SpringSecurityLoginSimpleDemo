@@ -1,8 +1,12 @@
 package com.yue.springsecurityjwtlogindemo2.handlers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.yue.springsecurityjwtlogindemo2.models.SystemMessageConstants;
+import com.yue.springsecurityjwtlogindemo2.utils.LanguageUtils;
 import com.yue.springsecurityjwtlogindemo2.utils.RespBean;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.MessageSource;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.logout.LogoutHandler;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
@@ -25,6 +29,9 @@ public class SystemLogoutSuccessHandler implements LogoutSuccessHandler {
     @Value("${developer.role}")
     private  String developerRole;
 
+    @Autowired
+    private LanguageUtils languageUtils;
+
     @Override
     public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
         System.out.println("YUE onLogoutSuccess");
@@ -34,7 +41,8 @@ public class SystemLogoutSuccessHandler implements LogoutSuccessHandler {
             response.setCharacterEncoding("UTF-8");
             response.setContentType("application/json");
             PrintWriter printWriter = response.getWriter();
-            RespBean respBean = RespBean.success("成功退出!");
+            String returnMessage = languageUtils.getMessage(SystemMessageConstants.LOGOUT_SUCCESS);
+            RespBean respBean = RespBean.success(returnMessage);
             printWriter.write(new ObjectMapper().writeValueAsString(respBean));
             printWriter.flush();
             printWriter.close();

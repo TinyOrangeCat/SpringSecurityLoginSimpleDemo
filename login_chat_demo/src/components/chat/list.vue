@@ -74,14 +74,14 @@ export default {
   }
 	li {
 		padding: 15px 15px;
-		border-bottom: 1px solid #292C33;
+		border-bottom: 1px solid #0f9561;
 		cursor: pointer;
 		&:hover {
 			background-color: rgba(255, 255, 255, 0.03);
 		}
 	}
   li.active {/*注意这个是.不是冒号:*/
-			background-color: rgba(255, 255, 255, 0.1);
+			background-color: rgba(246, 246, 246, 0.1);
 	}
 	.avatar {
 		border-radius: 2px;

@@ -4,11 +4,18 @@
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
     </div>-->
-    <router-view/>
+    <div id="navDiv">
+      <!-- 父组件传输收到的子组件name给导航组件   -->
+      <NavigationComponent v-bind:routeViewName="appRouteView"></NavigationComponent>
+    </div>
+    <!-- 子组件传输自己的name给父组件-->
+    <router-view v-on:fromRouterView="setAppRouteViewName"/>
   </div>
 </template>
 
 <style>
+/* https://returnc.com/detail/3736 */
+  @import "./themes/green_theme/index.css";
 /*#app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -30,3 +37,24 @@
   color: #42b983;
 }*/
 </style>
+<script>
+export default {
+  created() {
+  },
+  data(){
+    return{
+      appRouteView: ''
+    }
+  },
+  methods:{
+    setAppRouteViewName(routeViewName){
+      this.appRouteView = routeViewName;
+    }
+  },
+  watch:{
+    appRouteView(newAppRouteView){
+      console.log('app appRouteView : '+newAppRouteView)
+    }
+  }
+}
+</script>

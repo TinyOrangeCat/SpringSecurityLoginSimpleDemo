@@ -10,9 +10,9 @@ const FriendWebpackErrorPlugin = require('friendly-errors-webpack-plugin')
 module.exports={
   entry: path.resolve(__dirname,'../src/main.js'),
   output: {
-    //publicPath: path.resolve(__dirname,'../dist/js'),
+    //publicPath: '../',
     path: path.resolve(__dirname,'../dist'),
-    filename: 'js/bundle.js'
+    filename: './js/bundle.js'
   },
   module: {
     rules: [
@@ -53,9 +53,9 @@ module.exports={
     //publicPath: path.resolve(__dirname,'../dist/public'),
     //告诉服务器从哪个目录中提供内容。只有在你想要提供静态文件时才需要。devServer.publicPath 将用于确定应该从哪里提供 bundle，并且此选项优先。
     contentBase: [
-      path.resolve(__dirname,'../dist/js'),
-      path.resolve(__dirname,'../dist/css'),
-      path.resolve(__dirname,'../dist/images'),
+      path.resolve(__dirname,'./js'),
+      path.resolve(__dirname,'./css'),
+      path.resolve(__dirname,'./images'),
     ],
     // inline: true,
     //当使用 HTML5 History API 时，任意的 404 响应都可能需要被替代为 index.html。devServer.historyApiFallback 默认禁用。

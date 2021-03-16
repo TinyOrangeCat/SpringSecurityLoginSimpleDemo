@@ -3,6 +3,7 @@ package com.yue.springsecurityjwtlogindemo2.filters;
 import com.yue.springsecurityjwtlogindemo2.models.SystemLoginAccount;
 import com.yue.springsecurityjwtlogindemo2.services.impls.SystemUserDetailsService;
 import com.yue.springsecurityjwtlogindemo2.utils.JWTTokenUtils;
+import com.yue.springsecurityjwtlogindemo2.utils.LocaleUtils;
 import com.yue.springsecurityjwtlogindemo2.utils.MyUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -49,9 +50,16 @@ public class JWTTokenPreRequestFilter extends OncePerRequestFilter {
     @Qualifier("systemUserDetailsService")
     private SystemUserDetailsService systemUserDetailsService;
 
+    @Autowired
+    private LocaleUtils localeUtils;
+
     @Override
     protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {
         System.out.println("YUE JWTTokenPreRequestFilter url is : "+httpServletRequest.getRequestURI());
+        String lang = httpServletRequest.getHeader("lang");
+        boolean changeLangResult = localeUtils.changeLocaleByLangString(lang);
+        System.out.println("Pre request filter ,lang = "+lang+",changeLanguageResult: "+changeLangResult);
+
         String authenticationToken = httpServletRequest.getHeader(tokenHeader);
         if(authenticationToken != null && authenticationToken.startsWith(tokenHead)){
             String token = authenticationToken.substring(tokenHead.length());

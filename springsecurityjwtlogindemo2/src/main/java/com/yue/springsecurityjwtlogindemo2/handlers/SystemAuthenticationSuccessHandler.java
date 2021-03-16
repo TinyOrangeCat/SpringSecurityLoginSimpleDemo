@@ -2,11 +2,14 @@ package com.yue.springsecurityjwtlogindemo2.handlers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.yue.springsecurityjwtlogindemo2.models.SystemLoginAccount;
+import com.yue.springsecurityjwtlogindemo2.models.SystemMessageConstants;
 import com.yue.springsecurityjwtlogindemo2.services.ISystemMailService;
 import com.yue.springsecurityjwtlogindemo2.utils.JWTTokenUtils;
+import com.yue.springsecurityjwtlogindemo2.utils.LanguageUtils;
 import com.yue.springsecurityjwtlogindemo2.utils.RespBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.MessageSource;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -42,6 +45,9 @@ public class SystemAuthenticationSuccessHandler implements AuthenticationSuccess
     @Value("${developer.email}")
     private String email;
 
+    @Autowired
+    private LanguageUtils languageUtils;
+
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
         SecurityContextHolder.getContext().setAuthentication(authentication);
@@ -74,7 +80,8 @@ public class SystemAuthenticationSuccessHandler implements AuthenticationSuccess
         tokenInfo.put("tokenHead",tokenHead);
         tokenInfo.put("accountId",accountId);
         tokenInfo.put("username",username);
-        RespBean respBean = RespBean.success("账号认证成功!",tokenInfo);
+        String returnMessage = languageUtils.getMessage(SystemMessageConstants.LOGIN_SUCCESS);
+        RespBean respBean = RespBean.success(returnMessage,tokenInfo);
         printWriter.write(new ObjectMapper().writeValueAsString(respBean));
         printWriter.flush();
         printWriter.close();

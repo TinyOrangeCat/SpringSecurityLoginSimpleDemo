@@ -20,7 +20,9 @@ import Vuex from 'vuex'
 import {getRequest} from '../utils/api'
 import SocketJS from 'sockjs-client'
 import Stomp from 'stompjs'
-import { Notification } from 'element-ui';
+import { Notification } from 'element-ui'
+import {$t} from '../main'
+import {$tc} from '../main'
 
 Vue.use(Vuex)
 
@@ -189,7 +191,8 @@ const store = new Vuex.Store({
                   || (context.state.managerCurrentObj && receiveMessage.from != context.state.managerCurrentObj.managerAccount)
                   || (context.state.userCurrentObj && receiveMessage.from != context.state.userCurrentObj.userAccount)))){
                 Notification({
-                  title: '[ '+receiveMessage.fromNickName+' ]发来了一条消息!',
+                  //title: '[ '+receiveMessage.fromNickName+' ]发来了一条消息!',
+                  title: '[ '+receiveMessage.fromNickName+' ]'+$tc('sysMessage.userSendMessage'),
                   message: receiveMessage.messageContent.length>10 ? receiveMessage.messageContent.substr(0,10)+'......' : receiveMessage.messageContent,
                   position: 'bottom-right'
                 });
@@ -244,7 +247,8 @@ const store = new Vuex.Store({
         },
         isStompEmpty: state => {
           return state.stomp==null;
-        }
+        },
+
       }
     }
 )

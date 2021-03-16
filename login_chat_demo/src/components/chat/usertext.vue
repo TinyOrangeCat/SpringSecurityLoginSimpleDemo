@@ -1,6 +1,6 @@
 <template>
   <div id="uesrtext">
-    <textarea placeholder="按 Ctrl + Enter 发送" v-model="content" v-on:keyup="addMessage"></textarea>
+    <textarea :placeholder="$t('uiText.chatSend')" v-model="content" v-on:keyup="addMessage"></textarea>
   </div>
 </template>
 

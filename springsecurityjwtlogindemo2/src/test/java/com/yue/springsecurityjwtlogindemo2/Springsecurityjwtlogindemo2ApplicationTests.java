@@ -13,6 +13,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.UUID;
 
 @SpringBootTest
@@ -53,12 +54,12 @@ class Springsecurityjwtlogindemo2ApplicationTests {
     }
 
     @Test
-    public void getUserInfoTest(){
-        System.out.println(userController.getUserInfo(1));
+    public void getUserInfoTest(HttpServletRequest request){
+        System.out.println(userController.getUserInfo(1,request));
     }
     @Test
-    public void getManagerInfoTest(){
-        System.out.println(managerController.getManagerInfo(1));
+    public void getManagerInfoTest(HttpServletRequest request){
+        System.out.println(managerController.getManagerInfo(1,request));
     }
 
     //RedisTest START

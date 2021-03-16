@@ -27,6 +27,51 @@ module.exports = webpackMerge(baseConfig,{
   module:{
     rules: [
       {
+        //https://blog.csdn.net/qq_37431724/article/details/90343899
+        test: /\.(css|sass|scss|styl|styl(us)?)$/,
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              publicPath: '../'
+            }
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 2,
+              sourceMap: true,
+              //publicPath: '../'
+            }
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              postcssOptions:{
+                ident:"postcss",
+                plugins:[
+                  require("autoprefixer")()
+                ]
+              },
+
+              /*plugins: () => [
+                require('autoprefixer')
+              ],*/
+              sourceMap: true,
+              //publicPath: '../'
+            }
+          },
+          {
+            loader: 'sass-loader',
+            options: {
+              sourceMap: true,
+              //publicPath: '../'
+            }
+          }
+        ],
+        exclude: /node_modules/,
+      },
+      /*{
         test: /\.(css|sass|scss|styl|styl(us)?)$/,
         use: [
           {
@@ -41,7 +86,21 @@ module.exports = webpackMerge(baseConfig,{
           },
           "css-loader"
         ]
-      },
+      },*/
+      /*{
+        test: /\.scss$/,
+        use: [{
+          loader: "style-loader" // 将 JS 字符串生成为 style 节点
+        }, {
+          loader: "css-loader" // 将 CSS 转化成 CommonJS 模块
+        }, {
+          loader: "sass-loader", // 将 Sass 编译成 CSS
+          options: {
+            name: '[name].[hash:8].[ext]',
+            outputPath: './css'
+          }
+        }]
+      },*/
       {
         test: /\.(svg|png|jpg|gif|ico)$/,
         //use: 'url-loader'
@@ -51,7 +110,7 @@ module.exports = webpackMerge(baseConfig,{
             options: {
               limit: 8192,
               name: '[name].[hash:8].[ext]',
-              outputPath: '/images'
+              outputPath: './images'
             },
           }
         ]
@@ -66,7 +125,7 @@ module.exports = webpackMerge(baseConfig,{
             options: {
               limit: 8192,
               name: '[name].[hash:8].[ext]',
-              outputPath: '/fonts'
+              outputPath: './fonts'
             },
           }
         ]
@@ -79,7 +138,7 @@ module.exports = webpackMerge(baseConfig,{
             options: {
               //limit: 10240,
               name: '[name].[hash:8].[ext]',
-              outputPath: '/files'
+              outputPath: './files'
             },
           }
         ]
@@ -111,14 +170,14 @@ module.exports = webpackMerge(baseConfig,{
       }
     }),
     new MiniCssExtractPlugin({
-      filename: "/css/[name].[hash:8].css",
-      chunkFilename: "/css/chunk[id].[hash:8].css"
+      filename: './css/[name].[hash:8].css',
+      chunkFilename: './css/chunk[id].[hash:8].css',
     }),
     /**
      *  提取SourceMap到独立文件
      */
     new webpack.SourceMapDevToolPlugin({
-      filename: '/js/[name].js.map',
+      filename: './js/[name].js.map',
       // exclude: ['vendor.js']
     })
   ],
@@ -156,7 +215,10 @@ module.exports = webpackMerge(baseConfig,{
          */
         extractComments: 'all'
       }),
-      new OptimizeCSSAssetsPlugin({})
+      new OptimizeCSSAssetsPlugin({
+        publicPath: '../',
+
+      })
     ]
   }
 

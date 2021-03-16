@@ -1,10 +1,13 @@
 package com.yue.springsecurityjwtlogindemo2.providers;
 
 import com.yue.springsecurityjwtlogindemo2.models.SystemLoginAccount;
+import com.yue.springsecurityjwtlogindemo2.models.SystemMessageConstants;
 import com.yue.springsecurityjwtlogindemo2.services.impls.SystemUserDetailsService;
+import com.yue.springsecurityjwtlogindemo2.utils.LanguageUtils;
 import com.yue.springsecurityjwtlogindemo2.utils.SystemUserDetailsAuthenticationUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.MessageSource;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;
@@ -21,6 +24,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
  */
 public class SystemManagerAuthenticationProvider implements AuthenticationProvider {
     private static final String TABLE_NAME = "tab_manager";
+
+    @Autowired
+    private LanguageUtils languageUtils;
 
     @Autowired
     @Qualifier("systemUserDetailsService")
@@ -42,7 +48,8 @@ public class SystemManagerAuthenticationProvider implements AuthenticationProvid
             //userDetails = systemUserDetailsAuthenticationUtils.retrieveUser(username,authenticationToken,TABLE_NAME);
             userDetails = retrieveUser(username,authenticationToken,TABLE_NAME);
         }catch (UsernameNotFoundException e) {
-            throw new UsernameNotFoundException("Can't find the manager account!");
+            String exceptionMsg = languageUtils.getMessage(SystemMessageConstants.ACCOUNT_NOT_FOUND);
+            throw new UsernameNotFoundException(exceptionMsg);
         }
         try {
             systemUserDetailsAuthenticationUtils.userAccountCheck(userDetails);
@@ -50,7 +57,8 @@ public class SystemManagerAuthenticationProvider implements AuthenticationProvid
             //userAccountCheck(userDetails);
             checkPasswordToken(userDetails,authenticationToken);
         }catch (AuthenticationException e) {
-            throw new UsernameNotFoundException("Manager password or account is wrong!");
+            String exceptionMsg = languageUtils.getMessage(SystemMessageConstants.ACCOUNT_OR_PASSWORD_WRONG);
+            throw new UsernameNotFoundException(exceptionMsg);
         }
         //不要暴露密码
         //userDetails = systemUserDetailsAuthenticationUtils.safeUserDetails(userDetails);
@@ -83,11 +91,13 @@ public class SystemManagerAuthenticationProvider implements AuthenticationProvid
 
     private void checkPasswordToken(SystemLoginAccount userDetails,UsernamePasswordAuthenticationToken authenticationToken){
         if (authenticationToken.getCredentials() == null) {
-            throw new BadCredentialsException("Password is null");
+            String exceptionMsg = languageUtils.getMessage(SystemMessageConstants.PASSWORD_IS_NULL);
+            throw new BadCredentialsException(exceptionMsg);
         }
         String rowPassword = authenticationToken.getCredentials().toString();
         if(!passwordEncoder.matches(rowPassword,userDetails.getPassword())){
-            throw new BadCredentialsException("Bad credentials");
+            String exceptionMsg = languageUtils.getMessage(SystemMessageConstants.PASSWORD_WRONG);
+            throw new BadCredentialsException(exceptionMsg);
         }
     }
 

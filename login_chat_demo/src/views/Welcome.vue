@@ -1,7 +1,8 @@
 <template>
   <div id="welcomeUserDiv">
     <div>
-      首页
+    <!--      首页-->
+      {{ $t('uiText.homePage') }}
     </div>
     <div>
 
@@ -11,7 +12,11 @@
 
 <script>
 export default {
-name: "Welcome"
+  name: "Welcome",
+  created() {
+    console.log('welcome '+this.$route.name)
+    this.$emit('fromRouterView',this.$route.name)
+  }
 }
 </script>
 

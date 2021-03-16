@@ -1,7 +1,11 @@
 package com.yue.springsecurityjwtlogindemo2.handlers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.yue.springsecurityjwtlogindemo2.models.SystemMessageConstants;
+import com.yue.springsecurityjwtlogindemo2.utils.LanguageUtils;
 import com.yue.springsecurityjwtlogindemo2.utils.RespBean;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.stereotype.Component;
@@ -19,6 +23,9 @@ import java.io.PrintWriter;
  */
 @Component
 public class SystemAuthenticationFailureHandler implements AuthenticationFailureHandler {
+    @Autowired
+    private LanguageUtils languageUtils;
+
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
         String exceptionMessage = exception.getMessage();
@@ -29,7 +36,8 @@ public class SystemAuthenticationFailureHandler implements AuthenticationFailure
         if(exceptionMessage != null && !"".equals(exceptionMessage)){
             respBean = RespBean.unauthorized(exceptionMessage);
         }else{
-            respBean = RespBean.unauthorized("账号认证失败,请联系管理员!");
+            String returnMessage = languageUtils.getMessage(SystemMessageConstants.AUTHENTICATION_FAILURE);
+            respBean = RespBean.unauthorized(returnMessage);
         }
         printWriter.write(new ObjectMapper().writeValueAsString(respBean));
         printWriter.flush();

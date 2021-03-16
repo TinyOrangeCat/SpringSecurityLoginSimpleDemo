@@ -1,7 +1,11 @@
 package com.yue.springsecurityjwtlogindemo2.handlers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.yue.springsecurityjwtlogindemo2.models.SystemMessageConstants;
+import com.yue.springsecurityjwtlogindemo2.utils.LanguageUtils;
 import com.yue.springsecurityjwtlogindemo2.utils.RespBean;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.stereotype.Component;
@@ -19,6 +23,9 @@ import java.io.PrintWriter;
  */
 @Component
 public class SystemAccessDenyHandler implements AccessDeniedHandler {
+    @Autowired
+    private LanguageUtils languageUtils;
+
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException) throws IOException, ServletException {
         String exceptionMessage = accessDeniedException.getMessage();
@@ -29,7 +36,8 @@ public class SystemAccessDenyHandler implements AccessDeniedHandler {
         if(exceptionMessage != null && !"".equals(exceptionMessage)){
             respBean = RespBean.accessDeny(exceptionMessage);
         }else{
-            respBean = RespBean.accessDeny("访问被拒绝!");
+            String returnMessage = languageUtils.getMessage(SystemMessageConstants.ACCESS_DENIED);
+            respBean = RespBean.accessDeny(returnMessage);
         }
         printWriter.write(new ObjectMapper().writeValueAsString(respBean));
         printWriter.flush();

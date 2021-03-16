@@ -1,7 +1,11 @@
 package com.yue.springsecurityjwtlogindemo2.handlers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.yue.springsecurityjwtlogindemo2.models.SystemMessageConstants;
+import com.yue.springsecurityjwtlogindemo2.utils.LanguageUtils;
 import com.yue.springsecurityjwtlogindemo2.utils.RespBean;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
@@ -19,6 +23,9 @@ import java.io.PrintWriter;
  */
 @Component
 public class SystemAuthenticationEntryPoint implements AuthenticationEntryPoint {
+    @Autowired
+    private LanguageUtils languageUtils;
+
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
         String exceptionMessage = authException.getMessage();
@@ -29,7 +36,8 @@ public class SystemAuthenticationEntryPoint implements AuthenticationEntryPoint 
         if(exceptionMessage != null && !"".equals(exceptionMessage)){
             respBean = RespBean.unauthorized(exceptionMessage);
         }else{
-            respBean = RespBean.unauthorized("权限不足,请联系管理员!");
+            String returnMessage = languageUtils.getMessage(SystemMessageConstants.LOGIN_FAILURE);
+            respBean = RespBean.unauthorized(returnMessage);
         }
         printWriter.write(new ObjectMapper().writeValueAsString(respBean));
         printWriter.flush();

@@ -2,21 +2,23 @@
   <div id="userWelcome">
     <div id="userInnerDiv">
       <div>
-        欢迎用户！
+        <!--        欢迎用户！-->
+        {{ $t('uiText.welcomeUser') }}
         <label>{{userToken}}</label><br/>
         <label>{{userId}}</label>
       </div>
       <div>
-        <el-button v-on:click="userLogout">退出登录</el-button>
+        <!--        退出登录-->
+        <el-button v-on:click="userLogout">{{ $t('loginUI.logoutButton') }}</el-button>
       </div>
       <div>
-        <a href="/userInfoVue">查看个人信息</a>
+        <a href="/userInfoVue">{{ $t('uiText.userPersonInfo') }}</a>
       </div>
       <div>
-        <a href="/welcome">首页</a>
+        <a href="/welcome">{{ $t('uiText.homePage') }}</a>
       </div>
       <div>
-        <a href="/chatVue">聊天</a>
+        <a href="/chatVue">{{ $t('uiText.chat') }}</a>
       </div>
       <div>
         <el-button v-on:click="requestTest">UserRequestTest</el-button>
@@ -31,6 +33,8 @@ import axios from "axios";
 export default {
 name: "UserWelcome",
   created() {
+    console.log('userWelcome '+this.$route.name)
+    this.$emit('fromRouterView',this.$route.name)
     //连接websocket
     //this.$store.dispatch('connectChatWebsocket');
 
@@ -50,9 +54,9 @@ name: "UserWelcome",
       })
     },
     userLogout(){
-      this.$messageBox.confirm('此操作将退出登录，是否继续？','提示',{
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
+      this.$messageBox.confirm(this.$t('sysMessage.logoutConfirm'),this.$t('el.messagebox.title'),{
+        confirmButtonText: this.$t('el.popconfirm.confirmButtonText'),
+        cancelButtonText: this.$t('el.popconfirm.cancelButtonText'),
         type: 'warning'
       }).then(()=>{
         this.postRequest('/backendServer/logout').then(resp=>{
@@ -60,10 +64,11 @@ name: "UserWelcome",
           window.sessionStorage.removeItem("userID");
           window.sessionStorage.removeItem('username');
           window.sessionStorage.removeItem('loginRole');
+          window.sessionStorage.removeItem('lang');
           this.$router.replace('/');
         })
       }).catch(()=>{
-        this.$message.info('已取消退出!');
+        this.$message.info(this.$t('sysMessage.cancelLogout'));
       })
     }
   }

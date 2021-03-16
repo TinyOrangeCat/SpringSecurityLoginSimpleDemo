@@ -4,13 +4,17 @@ package com.yue.springsecurityjwtlogindemo2.controllers;
 import com.yue.springsecurityjwtlogindemo2.beans.Manager;
 import com.yue.springsecurityjwtlogindemo2.beans.ManagerInfo;
 import com.yue.springsecurityjwtlogindemo2.beans.Role;
+import com.yue.springsecurityjwtlogindemo2.models.SystemMessageConstants;
 import com.yue.springsecurityjwtlogindemo2.services.IManagerInfoService;
 import com.yue.springsecurityjwtlogindemo2.services.IManagerService;
 import com.yue.springsecurityjwtlogindemo2.services.IRoleService;
+import com.yue.springsecurityjwtlogindemo2.utils.LanguageUtils;
 import com.yue.springsecurityjwtlogindemo2.utils.RespBean;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
+import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -18,6 +22,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -41,12 +46,20 @@ public class ManagerController {
     @Autowired
     public IRoleService roleServiceImpl;
 
+    @Autowired
+    private LanguageUtils languageUtils;
+
+    private String querySuccessMessage;
+    private String queryEmptyMessage;
+
     @ApiOperation(value = "获取管理员信息",httpMethod = "GET")
     @GetMapping("/getManagerInfo")
-    public RespBean getManagerInfo(@RequestParam(value = "managerId",required = true) Integer managerId){
+    public RespBean getManagerInfo(@RequestParam(value = "managerId",required = true) Integer managerId, HttpServletRequest request){
+        System.out.println("getManagerInfo lang="+request.getHeader("lang"));
         Manager manager = managerServiceImpl.getById(managerId);
         ManagerInfo managerInfo = new ManagerInfo();
         Role managerRole = new Role();
+        System.out.println(LocaleContextHolder.getLocale());
         if(manager != null && manager.getManagerId() != null){
             managerInfo = managerInfoServiceImpl.getById(managerId);
             managerRole = roleServiceImpl.getById(manager.getManagerRoleId());
@@ -54,9 +67,11 @@ public class ManagerController {
             result.put("manager",manager);
             result.put("managerInfo",managerInfo);
             result.put("managerRole",managerRole);
-            return RespBean.success("ok!",result);
+            querySuccessMessage = languageUtils.getMessage(SystemMessageConstants.QUERY_MANAGER_SUCCESS,request.getHeader("lang"));
+            return RespBean.success(querySuccessMessage,result);
         }else {
-            return RespBean.emptySource("未找到该管理员信息！");
+            queryEmptyMessage = languageUtils.getMessage(SystemMessageConstants.QUERY_MANAGER_EMPTY,request.getHeader("lang"));
+            return RespBean.emptySource(queryEmptyMessage);
         }
     }
 }

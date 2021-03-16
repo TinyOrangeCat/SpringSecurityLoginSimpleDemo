@@ -4,7 +4,9 @@ import com.yue.springsecurityjwtlogindemo2.beans.Manager;
 import com.yue.springsecurityjwtlogindemo2.beans.Role;
 import com.yue.springsecurityjwtlogindemo2.beans.User;
 import com.yue.springsecurityjwtlogindemo2.models.SystemLoginAccount;
+import com.yue.springsecurityjwtlogindemo2.models.SystemMessageConstants;
 import com.yue.springsecurityjwtlogindemo2.services.*;
+import com.yue.springsecurityjwtlogindemo2.utils.LanguageUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.authority.AuthorityUtils;
@@ -43,6 +45,9 @@ public class SystemUserDetailsService implements UserDetailsService {
     @Autowired
     private IRoleService roleServiceImpl;
 
+    @Autowired
+    private LanguageUtils languageUtils;
+
     @Override
     public SystemLoginAccount loadUserByUsername(String username) throws UsernameNotFoundException {
         System.out.println("YUE SystemUserDetailsService");
@@ -58,7 +63,8 @@ public class SystemUserDetailsService implements UserDetailsService {
             try{
                 user = userServiceImpl.loadUserByUsername(username);
             }catch (UsernameNotFoundException e) {
-                throw new UsernameNotFoundException(e.getMessage());
+                String exceptionMsg = languageUtils.getMessage(SystemMessageConstants.BAD_CREDENTIALS);
+                throw new UsernameNotFoundException(exceptionMsg);
             }
             if (user != null) {
                 userDetails.setLoginAccount(user.getUserAccount());
@@ -71,7 +77,8 @@ public class SystemUserDetailsService implements UserDetailsService {
             try{
                 manager = managerServiceImpl.loadManagerByName(username);
             }catch (UsernameNotFoundException e) {
-                throw new UsernameNotFoundException(e.getMessage());
+                String exceptionMsg = languageUtils.getMessage(SystemMessageConstants.BAD_CREDENTIALS);
+                throw new UsernameNotFoundException(exceptionMsg);
             }
             if(manager != null){
                 userDetails.setLoginAccount(manager.getManagerAccount());

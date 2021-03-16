@@ -1,10 +1,14 @@
 package com.yue.springsecurityjwtlogindemo2.filters;
 
 import com.yue.springsecurityjwtlogindemo2.exceptions.CaptchaNotMatchException;
+import com.yue.springsecurityjwtlogindemo2.models.SystemMessageConstants;
+import com.yue.springsecurityjwtlogindemo2.utils.LanguageUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiParam;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -24,6 +28,9 @@ import javax.servlet.http.HttpServletResponse;
 public class JWTUserLoginAuthenticationFilter extends AbstractAuthenticationProcessingFilter {
 
     private final String TAG = "YUE UsernamePasswordAuthenticationFilter ";
+
+    @Autowired
+    private LanguageUtils languageUtils;
 
     @ApiParam(name = "loginAccount",required = true,value="用户登录账户")
     public static final String SPRING_SECURITY_FORM_USERNAME_KEY = "loginAccount";
@@ -55,7 +62,8 @@ public class JWTUserLoginAuthenticationFilter extends AbstractAuthenticationProc
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
         System.out.println(TAG+"user attemptAuthentication");
         if (this.postOnly && !request.getMethod().equals("POST")) {
-            throw new AuthenticationServiceException("Authentication method not supported: " + request.getMethod());
+            String exceptionMsg = languageUtils.getMessage(SystemMessageConstants.AUTHENTICATION_METHOD_NOT_SUPPORTED);
+            throw new AuthenticationServiceException(exceptionMsg + request.getMethod());
         }
         //验证图形验证码 START
         String captchaCode = obtainCode(request);
@@ -64,7 +72,8 @@ public class JWTUserLoginAuthenticationFilter extends AbstractAuthenticationProc
         captchaSessionCode = (captchaSessionCode != null) ? captchaSessionCode : "";
         System.out.println(TAG+"manager attemptAuthentication code: "+captchaCode+",sessionCode : "+captchaSessionCode);
         if("".equals(captchaCode) || "".equals(captchaSessionCode) || !captchaCode.equalsIgnoreCase(captchaSessionCode)){
-            throw new CaptchaNotMatchException("用户图形验证码不正确!");
+            String exceptionMsg = languageUtils.getMessage(SystemMessageConstants.CAPTCHA_NOT_MATCH_ERROR);
+            throw new CaptchaNotMatchException(exceptionMsg);
         }
         //验证图形验证码 END
 

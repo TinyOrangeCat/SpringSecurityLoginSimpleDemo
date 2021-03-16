@@ -60,6 +60,9 @@ spring:
     publisher-returns: true
   thymeleaf:
     prefix: classpath:/templates/
+  messages:
+    encoding: UTF-8
+    basename: i18n/systemMessage
 
 mybatis-plus:
   configuration:

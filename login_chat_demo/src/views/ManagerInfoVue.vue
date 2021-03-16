@@ -4,10 +4,14 @@
       <table>
         <thead>
           <tr>
-            <td>管理员账户ID</td>
+<!--            <td>管理员账户ID</td>
             <td>管理员账户</td>
             <td>管理员密码</td>
-            <td>管理员角色ID</td>
+            <td>管理员角色ID</td>-->
+            <td>{{ $t('managerTable.managerAccountId') }}</td>
+            <td>{{ $t('managerTable.managerAccount') }}</td>
+            <td>{{ $t('managerTable.managerPassword') }}</td>
+            <td>{{ $t('managerTable.managerRoleId') }}</td>
           </tr>
         </thead>
         <tbody>
@@ -24,8 +28,10 @@
       <table>
         <thead>
         <tr>
-          <td>管理员角色ID</td>
-          <td>管理员角色名称</td>
+<!--          <td>管理员角色ID</td>
+          <td>管理员角色名称</td>-->
+          <td>{{ $t('managerTable.managerRoleId') }}</td>
+          <td>{{ $t('managerTable.managerRoleName') }}</td>
         </tr>
         </thead>
         <tbody>
@@ -40,11 +46,16 @@
       <table>
         <thead>
         <tr>
-          <td>管理员账户信息ID</td>
+<!--          <td>管理员账户信息ID</td>
           <td>管理员账户ID</td>
           <td>管理员名字</td>
           <td>管理员工号</td>
-          <td>管理员邮箱</td>
+          <td>管理员邮箱</td>-->
+          <td>{{ $t('managerTable.managerInfoId') }}</td>
+          <td>{{ $t('managerTable.managerAccountId') }}</td>
+          <td>{{ $t('managerTable.managerName') }}</td>
+          <td>{{ $t('managerTable.managerWorkId') }}</td>
+          <td>{{ $t('managerTable.managerEmail') }}</td>
         </tr>
         </thead>
         <tbody>
@@ -59,10 +70,10 @@
       </table>
     </div>
     <div>
-      <a href="/welcome">首页</a>
+      <a href="/welcome">{{ $t('uiText.homePage') }}</a>
     </div>
     <div>
-      <el-button v-on:click="managerLogout">退出登录</el-button>
+      <el-button v-on:click="managerLogout">{{ $t('loginUI.logoutButton') }}</el-button>
     </div>
   </div>
 </template>
@@ -71,6 +82,8 @@
 export default {
   name: "ManagerInfoVue",
   created() {
+    console.log('managerInfoVue '+this.$route.name)
+    this.$emit('fromRouterView',this.$route.name)
     this.getRequest('/backendServer/manager/getManagerInfo', {'managerId':window.sessionStorage.getItem('managerID')}).then(resp=>{
       if(resp.obj){
         if(resp.obj.manager){
@@ -119,9 +132,9 @@ export default {
   },
   methods:{
     managerLogout(){
-      this.$messageBox.confirm('此操作将退出登录，是否继续？','提示',{
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
+      this.$messageBox.confirm(this.$t('sysMessage.logoutConfirm'),this.$t('el.messagebox.title'),{
+        confirmButtonText: this.$t('el.popconfirm.confirmButtonText'),
+        cancelButtonText: this.$t('el.popconfirm.cancelButtonText'),
         type: 'warning'
       }).then(()=>{
         this.postRequest('/backendServer/logout').then(resp=>{
@@ -129,10 +142,11 @@ export default {
           window.sessionStorage.removeItem("userID");
           window.sessionStorage.removeItem('username');
           window.sessionStorage.removeItem('loginRole');
+          window.sessionStorage.removeItem('lang');
           this.$router.replace('/');
         })
       }).catch(()=>{
-        this.$message.info('已取消退出!');
+        this.$message.info(this.$t('sysMessage.cancelLogout'));
       })
     }
   }

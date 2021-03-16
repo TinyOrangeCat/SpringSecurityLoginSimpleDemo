@@ -19,6 +19,9 @@ import usertext from '../components/chat/usertext.vue'
 export default {
   name: "ChatVue",
   created() {
+    console.log('ChatVue '+this.$route.name)
+    this.$emit('fromRouterView',this.$route.name)
+
     //连接websocket
     this.$store.dispatch('connectChatWebsocket');
   },
@@ -56,7 +59,7 @@ export default {
 .sidebar {
   float: left;
   color: #f4f4f4;
-  background-color: #2e3238;
+  background-color: #3bcb92;
   width: 200px;
 }
 .main {

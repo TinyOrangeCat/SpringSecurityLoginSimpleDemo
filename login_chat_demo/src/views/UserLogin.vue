@@ -1,24 +1,24 @@
 <template>
   <div id="userLogin">
-    <div id="loginDiv" v-loading="isLoading" element-loading-text="登录中...">
-      <h3 class="loginTitle">用户登录</h3>
+    <div id="loginDiv" v-loading="isLoading" :element-loading-text="$t('loginUI.loginIng')">
+      <h3 class="loginTitle">{{ $t('uiText.userLoginTitle') }}</h3>
       <el-form :label-position="labelPosition" :model="loginForm" :rules="loginFormRules" ref="userLoginForm" label-width="100px" class="demo-ruleForm">
-        <el-form-item label="登录账户" prop="loginAccount">
-          <el-input v-model="loginForm.loginAccount" placeholder="请输入登录用户名"></el-input>
+        <el-form-item :label="$t('loginUI.loginAccount')" prop="loginAccount">
+          <el-input v-model="loginForm.loginAccount" :placeholder="$t('loginUI.loginAccountInfo')"></el-input>
         </el-form-item>
-        <el-form-item label="登录密码" prop="loginPassword">
-          <el-input v-model="loginForm.loginPassword" show-password placeholder="请输入登录密码"></el-input>
+        <el-form-item :label="$t('loginUI.loginPassword')" prop="loginPassword">
+          <el-input v-model="loginForm.loginPassword" show-password :placeholder="$t('loginUI.loginPasswordInfo')"></el-input>
         </el-form-item>
         <el-form-item prop="loginCode">
-          <el-input id="loginCodeInput" v-model="loginForm.loginCode" placeholder="点击图片以切换验证码"></el-input>
-          <el-image id="codeImage" v-bind:src="captchaUrl" alt="验证码图片" v-on:click="getCaptchaImage" style="cursor: pointer"></el-image>
+          <el-input id="loginCodeInput" v-model="loginForm.loginCode" :placeholder="$t('loginUI.loginVerifyCodeInfo')"></el-input>
+          <el-image id="codeImage" v-bind:src="captchaUrl" :alt="$t('el.image.error')" v-on:click="getCaptchaImage" style="cursor: pointer"></el-image>
         </el-form-item>
 <!--        <el-form-item label="记住登录?">
           <el-checkbox v-model="ruleForm.rememberMe"></el-checkbox>
         </el-form-item>-->
         <el-form-item>
-          <el-button type="primary" @click="submitForm('userLoginForm')">登录</el-button>
-          <el-button @click="resetForm('userLoginForm')">重置</el-button>
+          <el-button type="primary" @click="submitForm('userLoginForm')">{{ $t('loginUI.loginButton') }}</el-button>
+          <el-button @click="resetForm('userLoginForm')">{{ $t('loginUI.loginReset') }}</el-button>
         </el-form-item>
       </el-form>
 
@@ -29,6 +29,11 @@
 <script>
 export default {
 name: "UserLogin",
+  created() {
+    console.log('userLogin '+this.$route.name)
+    this.$emit('fromRouterView',this.$route.name)
+    console.log('i18n = '+this.$i18n.locale)
+  },
   destroyed() {
     this.isLoading = false;
   },
@@ -45,16 +50,16 @@ name: "UserLogin",
       },
       loginFormRules: {
         loginAccount: [
-          { required: true, message: '请输登录名', trigger: 'blur' },
-          { min: 3, max: 10, message: '长度在 3 到 10 个字符', trigger: 'blur' }
+          { required: true, message: this.$t('loginUI.loginAccountInfo'), trigger: 'blur' },
+          { min: 3, max: 10, message: this.$t('loginUI.loginInputInfo',{min: '3',max: '10'}), trigger: 'blur' }
         ],
         loginPassword:[
-          { required: true, message: '请输入登录密码',trigger: 'blur'},
-          { min:3, max:12, message: '长度在 3 到 12 个字符', trigger: "blur"}
+          { required: true, message: this.$t('loginUI.loginPasswordInfo'),trigger: 'blur'},
+          { min:3, max:12, message: this.$t('loginUI.loginInputInfo',{min: '3',max: '12'}), trigger: "blur"}
         ],
         loginCode:[
-          { required: true, message: '请输入图片中的验证码',trigger: 'blur'},
-          { min:4, max: 6, message: '长度在 4 到 6 个字符', trigger: 'blur'}
+          { required: true, message: this.$t('loginUI.loginVerifyCodeInfo'),trigger: 'blur'},
+          { min:4, max: 6, message: this.$t('loginUI.loginInputInfo',{min: '4',max: '6'}), trigger: 'blur'}
         ]
       }
     };
