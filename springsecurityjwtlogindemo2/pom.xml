@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.yue</groupId>
     <artifactId>springsecurityjwtlogindemo2</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.1.0-SNAPSHOT</version>
     <name>springsecurityjwtlogindemo2</name>
     <description>Demo project for Spring Boot</description>
     <properties>
@@ -165,6 +165,13 @@
                     </excludes>
                 </configuration>
             </plugin>
+            <!--<plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>-->
         </plugins>
     </build>
 

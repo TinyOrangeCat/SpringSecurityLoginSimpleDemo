@@ -54,3 +54,8 @@ resources/sqls下有测试用的建表语句。
 
 聊天部分的前端demo来自https://github.com/is-liyiwei/vue-Chat-demo.git，感谢！
 
+
+
+## 五、i18n
+
+前端后端支持切换语言（简体中文/英文/日文）。

@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
  * @since 2021-02-26
  */
 @Mapper
-@Component(value = "roleMapper")
+//@Component(value = "roleMapper")
 public interface RoleMapper extends BaseMapper<Role> {
 
 }

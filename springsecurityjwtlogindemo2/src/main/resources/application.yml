@@ -74,7 +74,7 @@ mybatis-plus:
       id-type: auto
       table-prefix: tab_
       update-strategy: not_empty
-  mapper-locations: classpath:/mappers/**
+  mapper-locations: classpath:/mappers/*.xml
 
 #logging:
   #config: classpath:log4j.xml

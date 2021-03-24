@@ -11,7 +11,7 @@
  Target Server Version : 80022
  File Encoding         : 65001
 
- Date: 03/03/2021 00:18:27
+ Date: 18/03/2021 16:59:32
 */
 
 SET NAMES utf8mb4;
@@ -53,12 +53,14 @@ CREATE TABLE `tab_manager`  (
   `manager_password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   `manager_role_id` int NULL DEFAULT NULL,
   PRIMARY KEY (`manager_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tab_manager
 -- ----------------------------
 INSERT INTO `tab_manager` VALUES (1, 'admin', '222', 1);
+INSERT INTO `tab_manager` VALUES (2, 'Manager1', '222', 1);
+INSERT INTO `tab_manager` VALUES (3, 'Manager2', '222', 1);
 
 -- ----------------------------
 -- Table structure for tab_manager_info
@@ -71,12 +73,14 @@ CREATE TABLE `tab_manager_info`  (
   `manager_code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   `manager_email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   PRIMARY KEY (`manager_info_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tab_manager_info
 -- ----------------------------
 INSERT INTO `tab_manager_info` VALUES (1, 1, '陈陈陈', '1245213', 'Chen@sina.com');
+INSERT INTO `tab_manager_info` VALUES (2, 2, '林子', '15485455', 'Lin1992@qq.com');
+INSERT INTO `tab_manager_info` VALUES (3, 3, '关栋天', '41515454', 'GuanDongTian@qq.com');
 
 -- ----------------------------
 -- Table structure for tab_role
@@ -106,12 +110,14 @@ CREATE TABLE `tab_user`  (
   `user_password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   `user_role_id` int NULL DEFAULT NULL,
   PRIMARY KEY (`user_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tab_user
 -- ----------------------------
 INSERT INTO `tab_user` VALUES (1, 'user', '111', 2);
+INSERT INTO `tab_user` VALUES (2, 'Katy', '111', 2);
+INSERT INTO `tab_user` VALUES (3, 'MiMi', '111', 2);
 
 -- ----------------------------
 -- Table structure for tab_user_info
@@ -125,11 +131,13 @@ CREATE TABLE `tab_user_info`  (
   `user_gender` char(2) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   `user_email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   PRIMARY KEY (`user_info_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of tab_user_info
 -- ----------------------------
 INSERT INTO `tab_user_info` VALUES (1, 1, 'Jay', 30, '男', 'Jay1990@qq.com');
+INSERT INTO `tab_user_info` VALUES (2, 2, 'Katy', 25, '女', 'Katy@sina.com');
+INSERT INTO `tab_user_info` VALUES (3, 3, 'MiMi', 15, '女', 'Mimi@hotmail.com');
 
 SET FOREIGN_KEY_CHECKS = 1;

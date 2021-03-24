@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
  * @since 2021-02-26
  */
 @Mapper
-@Component(value = "managerMapper")
+//@Component(value = "managerMapper")
 public interface ManagerMapper extends BaseMapper<Manager> {
 
 }

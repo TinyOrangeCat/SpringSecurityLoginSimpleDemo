@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Configuration;
  * @Time 2021/2/25 14:42
  */
 @Configuration
-@MapperScan(basePackages = "com.yue.springsecurityjwtlogindemo2.mappers")
+//@MapperScan(basePackages = "com.yue.springsecurityjwtlogindemo2.mappers")
 public class MyBatisPlusConfig {
     @Bean
     public MybatisPlusInterceptor mybatisPlusInterceptor(){

@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
  * @since 2021-03-02
  */
 @Mapper
-@Component("mailLogMapper")
+//@Component("mailLogMapper")
 public interface MailLogMapper extends BaseMapper<MailLog> {
 
 }
